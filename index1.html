@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yasin Collection</title>
+    <style>
+     ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 10px;
+}
+
+li {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+li:nth-child(odd) { background-color: green; }
+li:nth-child(even) { background-color: #00004d; } 
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            touch-action: manipulation;
+        }
+        header {
+            background-color: #f0f0f0;
+            padding: 1rem;
+            text-align: center;
+        }
+        nav {
+            display: flex;
+            justify-content: space-around;
+        }
+        nav a {
+            text-decoration: none;
+            color: #333;
+            padding: 0.5rem 1rem;
+        }
+        nav a:hover {
+            background-color: #ddd;
+        }
+        section {
+            padding: 2rem;
+        }
+        .product {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            padding: 1rem;
+            position: relative;
+            overflow: hidden; /* Hide overflowing image during transition */
+        }
+        .product img {
+            max-width: 400px;
+            max-height: 400px;
+            width: auto;
+            height: auto;
+            margin-right: 1rem;
+            transition: opacity 0.5s ease-in-out; /* Smooth opacity transition */
+        }
+        .buy-now {
+            background-color: Magenta;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+        @media (max-width: 600px) {
+            nav {
+                flex-direction: column;
+            }
+            .product {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .product img {
+                max-width: 100%;
+                max-height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Yasin Collection</h1>
+        <nav>
+   
+        <a href="#">Home</a>
+       
+        </nav>
+    </header>
+   
+
+    <section id="shop">
+        <h2>Our Products</h2>
+        <div class="product">
+            <img id="shirtImage" src="Tomy1.jpeg" alt="Shirt">
+            <h3>Cabirka shaadhka: XL</h3>
+            <p>Qiimaha:1800 birr </p>
+            <a href="tel:*841#" class="buy-now">Hadda Iibso</a>
+<ul>
+  <li><a href="tel:*841#">EBIRR</a></li>
+  <li><a href="tel:*676#">ESAHAL</a></li>
+  <li><a href="tel:*838#">HCASH</a></li>
+  <li><a href="tel:*873#">SAHAY</a></li>
+</ul>
+
+        </div>
+        <div class="product">
+            <img src="pants.jpg" alt="Pants">
+            <h3>Pants</h3>
+            <p>Price: $30</p>
+            <a href="tel:*841#" class="buy-now">Buy Now</a>
+            <ul>
+  <li class="blue"><a href="https://www.example.com">Example</a></li>
+  <li class="green"><a href="https://www.google.com">Google</a></li>
+  <li class="yellow"><a href="https://www.wikipedia.org">Wikipedia</a></li>
+</ul>
+        </div>
+    </section>
+
+    <script>
+        let shirtImages = ["Tomy2.jpeg", "Tomy1.jpeg", "Tomy2.jpeg"];
+        let currentShirtIndex = 0;
+        let startX = 0;
+        let slideshowInterval;
+
+
+        function showNextShirt() {
+            currentShirtIndex = (currentShirtIndex + 1) % shirtImages.length;
+            updateShirtImage();
+        }
+
+        function showPreviousShirt() {
+            currentShirtIndex = (currentShirtIndex - 1 + shirtImages.length) % shirtImages.length;
+            updateShirtImage();
+        }
+
+        function updateShirtImage() {
+            document.getElementById("shirtImage").src = shirtImages[currentShirtIndex];
+        }
+
+        const shirtImage = document.getElementById("shirtImage");
+        shirtImage.addEventListener("touchstart", (e) => {
+            clearInterval(slideshowInterval); // Stop automatic slideshow on touch
+            startX = e.touches[0].clientX;
+        });
+
+        shirtImage.addEventListener("touchend", (e) => {
+            const endX = e.changedTouches[0].clientX;
+            const diffX = startX - endX;
+            if (diffX > 50) {
+                showPreviousShirt();
+            } else if (diffX < -50) {
+                showNextShirt();
+            }
+            startSlideshow(); // Restart automatic slideshow after touch
+        });
+
+        function startSlideshow() {
+            slideshowInterval = setInterval(showNextShirt, 2000); // Change image every 3 seconds
+        }
+
+        startSlideshow(); // Start the slideshow automatically on page load
+
+    </script>
+</body>
+</html>
+
